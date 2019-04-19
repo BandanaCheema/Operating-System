@@ -1,0 +1,51 @@
+     
+      case 2:
+      	for(i = 0; i < range; i++)
+      {
+            position = i;
+            for(j = i + 1; j < range; j++)
+            {
+                  if(burst_time[j] < burst_time[position])
+                  {
+                        position = j;
+                  }
+            }
+            temp = burst_time[i];
+            burst_time[i] = burst_time[position];
+            burst_time[position] = temp;
+            temp = process[i];
+            process[i] = process[position];
+            process[position] = temp;
+      }	
+      waiting_time[0] = 0;
+      for(i = 1; i < range; i++)
+      {
+            waiting_time[i] = 0;
+            for(j = 0; j < i; j++)
+            {
+                  waiting_time[i] = waiting_time[i] + burst_time[j];
+            } 
+            sum = sum + waiting_time[i];
+      }
+      average_wait_time = (float)sum / range;
+      sum = 0;
+      printf("\nProcess ID\t\tBurst Time\t Arrival Time\t Waiting Time\t Turnaround Time\n");
+      for(i = 0; i < range; i++)
+      {
+            turnaround_time[i] = burst_time[i] + waiting_time[i];
+            sum = sum + turnaround_time[i];
+            printf("\nProcess[%d]\t\t%d\t\t %d\t\t\%d\t\t %d\n", process[i], burst_time[i],2*arrival_time[i] ,waiting_time[i], turnaround_time[i]);
+      }
+      average_turnaround_time = (float)sum / range;
+      printf("\nAverage Waiting Time:\t%f\n", average_wait_time);
+      printf("\nAverage Turnaround Time:\t%f\n", average_turnaround_time);
+      break;
+      case 3:
+      		default:
+      		break;
+      case4:
+      		exit(1);
+      
+      
+	  }
+}
